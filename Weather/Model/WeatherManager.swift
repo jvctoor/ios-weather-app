@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 let keys = Keys()
 
@@ -14,9 +15,10 @@ struct WeatherManager {
     
     let weatherURL = "https://api.openweathermap.org/data/2.5/weather?appid=\(keys.API_KEY)&units=metric"
     
-    func fetchWeather(_ cityName: String){
+    func fetchWeather(_ cityName: String) {
         let urlString = "\(weatherURL)&q=\(cityName)"
         performRequest(urlString: urlString)
+        
     }
     
     func performRequest(urlString: String) {
@@ -48,8 +50,7 @@ struct WeatherManager {
             let id = decodedData.weather[0].id
             let temp = decodedData.main.temp
             let name = decodedData.name
-            let weather = WeatherModel(conditionId: id, cityName: name, temperature: temp)
-            print(weather.conditionName)
+            let weatherModel = WeatherModel(conditionId: id, cityName: name, temperature: temp)
             
         } catch {
             print(error)

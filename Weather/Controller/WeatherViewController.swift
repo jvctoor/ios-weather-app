@@ -34,11 +34,11 @@ class WeatherViewController: UIViewController, UITextFieldDelegate {
         
         if let city = searchBar.text {
             weatherManager.fetchWeather(city)
+            
         }
         
         searchBar.text = ""
     }
-    
     
 }
 
