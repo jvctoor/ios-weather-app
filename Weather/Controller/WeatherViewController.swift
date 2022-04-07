@@ -15,29 +15,27 @@ class WeatherViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var searchBar: UITextField!
     @IBOutlet weak var cityLabel: UILabel!
     
+    var weatherManager = WeatherManager()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         searchBar.delegate = self
     }
 
     @IBAction func searchPressed(_ sender: UIButton) {
-        if let texto = searchBar.text {
-            print(texto)
-            searchBar.endEditing(true)
-        }
+        searchBar.endEditing(true)
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if let texto = searchBar.text {
-            print(texto)
-            searchBar.endEditing(true)
-            return true
-        } else {
-            return false
-        }
+        searchBar.endEditing(true)
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
+        
+        if let city = searchBar.text {
+            weatherManager.fetchWeather(city)
+        }
+        
         searchBar.text = ""
     }
     
